@@ -5,9 +5,10 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { Product } from './product';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 const apiUrl = 'http://localhost:5000/api/v1/products';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,11 +16,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(apiUrl)
+  getProducts(): Observable<any> {
+    return this.http.get<Product>(apiUrl)
       .pipe(
         tap(product => console.log('fetched products')),
-        catchError(this.handleError('getProducts', []))
+        catchError(this.handleError('getProducts', {}))
       );
   }
 
@@ -33,7 +34,7 @@ export class ApiService {
 
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(apiUrl, product, httpOptions).pipe(
-      tap((prod: any) => console.log(`added product w/ id=${prod._id}`)),
+      tap((prod: any) => console.log(`added product w/ id=${prod.id}`)),
       catchError(this.handleError<Product>('addProduct'))
     );
   }

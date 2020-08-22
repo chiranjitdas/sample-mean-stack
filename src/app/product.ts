@@ -1,7 +1,7 @@
 export class Product {
-  _id: string;
+  id: string;
   name: string;
-  prod_desc: string;
+  description: string;
   price: number;
   updated_at: Date;
 }
