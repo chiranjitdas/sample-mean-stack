@@ -8,6 +8,7 @@ import { Product } from '../product';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
+
 export class ProductDetailComponent implements OnInit {
 
   product: Product = { id: '', name: '', description: '', price: null, updated_at: null };
